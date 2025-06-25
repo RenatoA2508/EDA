@@ -8,8 +8,10 @@ public class PrincipalArbol {
 		arbol1.insertar(10);
 		arbol1.insertar(5);
 		arbol1.insertar(15);
-		arbol1.insertar(2);
+		arbol1.insertar(6);
+		arbol1.insertar(17);
 		arbol1.insertar(20);
+		
 		
 		//arbol1.PreOrder(arbol1.getRaiz());
 		arbol1.EjecutarPreOrder();

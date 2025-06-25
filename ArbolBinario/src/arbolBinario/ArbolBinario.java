@@ -15,7 +15,7 @@ public class ArbolBinario {
 			this.raiz = new NodoArbol(valor);
 		}else {
 			System.out.println("Insertando nodo no raiz... "+valor);
-			this.raiz.insertarNodo(valor);
+			this.raiz.insertarNodo(valor);//Se empieza a decidir donde colocar el nodo desde la raiz, va bajando segun las llamadas recursivas
 		}
 	}
 	//Recorrido preorden
@@ -23,12 +23,12 @@ public class ArbolBinario {
 		PreOrder(raiz);
 	}
 	public void PreOrder(NodoArbol nodo) {
-		if(nodo == null) {
+		if(nodo == null) { //Caso base
 			return;
 		}else {
-			System.out.print(nodo.getDato() + "-");
-			PreOrder(nodo.getIzquierda());
-			PreOrder(nodo.getDerecha());
+			System.out.print(nodo.getDato() + "-"); //Visita la raiz (R)
+			PreOrder(nodo.getIzquierda()); //Recorre el subarbol izquierdo (I)
+			PreOrder(nodo.getDerecha()); //Recorre el subarbol derecho (D)
 		}
 	}
 	
