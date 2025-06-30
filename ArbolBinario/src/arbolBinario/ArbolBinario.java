@@ -58,6 +58,24 @@ public class ArbolBinario {
 			System.out.print(nodo.getDato() + "-"); //Visita la raiz (R)
 		}
 	}
+	//Buscar con while
+	public boolean ejecutarBuscarNodo2(int valor) {
+		return buscarNodo2(raiz, valor);
+	}
+	public boolean buscarNodo2(NodoArbol nodo, int dato) {
+		NodoArbol aux = nodo;
+		while(dato != aux.getDato()) {
+			if(dato < aux.getDato()) {
+				aux =  aux.getIzquierda();
+			}else {
+				aux =  aux.getDerecha();
+			}
+			if(aux == null) {
+				return false;
+			}
+		}
+		return true;
+	}
 	//Buscar nodo del arbol
 	public void ejecutarBuscarNodo(int valor) {
 		buscarNodo(raiz, valor);
@@ -72,12 +90,12 @@ public class ArbolBinario {
 			System.out.println("Elemento "+dato+" no se encontro");
 			return;
 		}
-		if(nodo.dato == dato) {
+		if(nodo.getDato() == dato) {
 			System.out.println("Elemento "+dato+" encontrado en el nivel " + nivel);
 			nivel = 0;
 			return;
 		}
-		if(dato<nodo.dato) { 
+		if(dato<nodo.getDato()) { 
 			System.out.println("Buscando en el subarbol izquierdo");
 			contarNiveles();
 			buscarNodo(nodo.getIzquierda(), dato);
@@ -88,6 +106,41 @@ public class ArbolBinario {
 			contarNiveles();
 			buscarNodo(nodo.getDerecha(), dato);
 		}	
+	}
+	//Eliminar nodo
+	public void EliminarNodoHoja(NodoArbol padre, NodoArbol aux, boolean esHijoIzq) {
+		if(aux == raiz) {
+			raiz = null;
+		}else {
+			if(esHijoIzq) {
+				padre.setIzquierdo(null);
+			}else {
+				padre.setDerecho(null);
+			}
+		}
+	}
+	public void EliminarNodoUnHijo(NodoArbol padre, NodoArbol aux, boolean esHijoIzq) {
+		if(aux.getDerecha() == null) {
+			if(aux == raiz) {
+				raiz = raiz.getIzquierda();
+			}else {
+				if(esHijoIzq) {
+					padre.setIzquierdo(aux.getIzquierda());
+				}else {
+					padre.setDerecho(aux.getIzquierda());
+				}
+			}
+		}else {
+			if(aux == raiz) {
+				raiz = raiz.getDerecha();
+			}else {
+				if(esHijoIzq) {
+					padre.setIzquierdo(aux.getIzquierda());
+				}else {
+					padre.setDerecho(aux.getIzquierda());
+				}
+			}
+		}
 	}
 	//Contar niveles{
 	public void contarNiveles() {

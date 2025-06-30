@@ -1,8 +1,8 @@
 package arbolBinario;
 
 public class NodoArbol {
-	public int dato;
-	public NodoArbol izquierdo, derecho;
+	private int dato;
+	private NodoArbol izquierdo, derecho;
 	public NodoArbol(int dato) {
 		this.dato = dato;
 		this.izquierdo = null;
@@ -18,6 +18,22 @@ public class NodoArbol {
 	public NodoArbol getDerecha() {
 		return derecho;
 	}
+	//Setters
+	public void setDato(int dato) {
+		this.dato = dato;
+	}
+	public void setIzquierdo(NodoArbol izquierdo) {
+		this.izquierdo = izquierdo;
+	}
+	public void setDerecho(NodoArbol derecho) {
+		this.derecho = derecho;
+	}
+	//Verificar si es nodo hoja
+	public boolean esHoja() {
+		return izquierdo == null && derecho == null;
+	}
+	
+	
 	
 	public void insertarNodo(int dato) {
 		if(dato<this.dato) { //Compara el parametro con el valor del nodo que hace la llamada (sea raiz, izquierdo o derecho)
