@@ -20,7 +20,6 @@ public class Arbol {
         } else {
             nodo.derecho = InsertarRec(nodo.derecho, valor);
         }
-
         return nodo;
     }
 
