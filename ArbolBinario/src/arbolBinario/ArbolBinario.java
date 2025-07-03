@@ -23,7 +23,7 @@ public class ArbolBinario {
 	public void EjecutarPreOrder() {
 		PreOrder(raiz);
 	}
-	public void PreOrder(NodoArbol nodo) {
+	private void PreOrder(NodoArbol nodo) {
 		if(nodo == null) { //Caso base
 			return;
 		}else {
@@ -36,7 +36,7 @@ public class ArbolBinario {
 	public void EjecutarInOrder() {
 		InOrder(raiz);
 	}
-	public void InOrder(NodoArbol nodo) {
+	private void InOrder(NodoArbol nodo) {
 		if(nodo == null) { //Caso base
 			return;
 		}else {
@@ -49,7 +49,7 @@ public class ArbolBinario {
 	public void EjecutarPostOrder() {
 		PostOrder(raiz);
 	}
-	public void PostOrder(NodoArbol nodo) {
+	private void PostOrder(NodoArbol nodo) {
 		if(nodo == null) { //Caso base
 			return;
 		}else {

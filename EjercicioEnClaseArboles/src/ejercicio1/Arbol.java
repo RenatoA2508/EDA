@@ -40,22 +40,21 @@ public class Arbol {
             InOrdenRec(nodo.derecho);
         }
     }
-    public int InOrdenMultTres() {
-    	int multiplo = InOrdenRecMultTres(inicial);
-        System.out.println();
-        return multiplo;
+    
+    
+    public int primerMultiploDeTres() {
+        return buscarMultiploDeTres(inicial);
     }
+    
+    private int buscarMultiploDeTres(Nodo nodo) {
+        if (nodo == null) return -1; //Caso base
 
-    private int InOrdenRecMultTres(Nodo nodo) {
-    	int multiplo=-1;
-    	if(nodo == null) {
-    		return multiplo;
-    	}else {
-    		InOrdenRecMultTres(nodo.izquierdo);
-            if(nodo.valor % 3 == 0) multiplo = nodo.valor;
-            InOrdenRecMultTres(nodo.derecho);
-    	}
-    	return multiplo;
+        int encontrado = buscarMultiploDeTres(nodo.izquierdo); //Recorre el subarbol izquierdo (I)
+        if (encontrado != -1) return encontrado;        
+
+        if (nodo.valor % 3 == 0)  return nodo.valor; //Visita la raiz (R)
+
+        return buscarMultiploDeTres(nodo.derecho); ////Recorre el subarbol derecho (R)
     }
     
     
