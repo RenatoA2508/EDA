@@ -59,34 +59,51 @@ public class Arbol {
     
     
     public void Eliminar(int valor) {
-        inicial = EliminarRec(inicial, valor);
+        inicial = eliminarNodo(inicial, valor);
     }
 
-    private Nodo EliminarRec(Nodo nodo, int valor) {
-    	System.out.println("imprimiendo nodo.derecho valor: " + nodo.valor + ", " + valor);
-        if (nodo == null) return null;
-
-        if (valor < nodo.valor) {
-            nodo.izquierdo = EliminarRec(nodo.izquierdo, valor);
-        } else{ 
-        	
-        	if (valor > nodo.valor) {
-        		nodo.derecho = EliminarRec(nodo.derecho, valor);
-        	} else {
-            // Caso: nodo sin hijos o un solo hijo
-            if (nodo.izquierdo == null) return nodo.derecho;
-            if (nodo.derecho == null) return nodo.izquierdo;
-
-            // Caso: nodo con dos hijos
-            Nodo sucesor = Minimo(nodo.derecho);
-            nodo.valor = sucesor.valor;
-            System.out.println("valor de nodo.derecho que envío a eliminar: " + nodo.valor);
-            nodo.derecho = EliminarRec(nodo.derecho, sucesor.valor);
-            
-        	}
-        }
-        return nodo;
-    }
+//    private Nodo EliminarRec(Nodo nodo, int valor) {
+//    	System.out.println("imprimiendo nodo.derecho valor: " + nodo.valor + ", " + valor);
+//        if (nodo == null) return null;
+//
+//        if (valor < nodo.valor) {
+//            nodo.izquierdo = EliminarRec(nodo.izquierdo, valor);
+//        } else{ 
+//        	
+//        	if (valor > nodo.valor) {
+//        		nodo.derecho = EliminarRec(nodo.derecho, valor);
+//        	} else {
+//            // Caso: nodo sin hijos o un solo hijo
+//            if (nodo.izquierdo == null) return nodo.derecho;
+//            if (nodo.derecho == null) return nodo.izquierdo;
+//
+//            // Caso: nodo con dos hijos
+//            Nodo sucesor = Minimo(nodo.derecho);
+//            nodo.valor = sucesor.valor;
+//            System.out.println("valor de nodo.derecho que envío a eliminar: " + nodo.valor);
+//            nodo.derecho = EliminarRec(nodo.derecho, sucesor.valor);
+//            
+//        	}
+//        }
+//        return nodo;
+//    }
+    private Nodo eliminarNodo(Nodo nodo, int valor) {
+		if(nodo == null) return null;
+		if(valor < nodo.valor) {
+			nodo.izquierdo = eliminarNodo(nodo.izquierdo, valor);
+		}else if(valor > nodo.valor) {
+			nodo.derecho = eliminarNodo(nodo.derecho, valor);
+		}else {
+			if(nodo.derecho == null) return nodo.izquierdo;
+			if(nodo.izquierdo== null) return nodo.derecho;
+			
+			Nodo sucesor = Minimo(nodo.derecho);
+			nodo.valor = sucesor.valor;
+			System.out.println("Nodo eliminado: "+nodo.valor);
+			nodo.derecho = eliminarNodo(nodo.derecho, sucesor.valor); 
+		}
+		return nodo;
+	}
     
     
     public int Minimo() {
