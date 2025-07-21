@@ -1,7 +1,7 @@
 package arbolAVL;
 
 public class ArbolAVL {
-	private Nodo raiz; //El árbol empieza desde una raíz. Es un puntero que nunca se moverá para no perder la referencia a la estructura
+private Nodo raiz; //El árbol empieza desde una raíz. Es un puntero que nunca se moverá para no perder la referencia a la estructura
 	
 	//Método para insertar nodos en el árbol
 	private Nodo insertarNodo(Nodo nodo, int valor) {
@@ -18,6 +18,10 @@ public class ArbolAVL {
 		nodo.altura = Math.max(alturaNodo(nodo.izquierdo), alturaNodo(nodo.derecho)) + 1; /*Se calcula la altura del nodo (raíz) actual con la mayor de las 
 		alturas del subárbol derecho e izquierdo y sumando 1 porque se añade un nuevo nodo*/
 		return balancear(nodo); //Balancea el arbol en caso de que el nodo insertado haya alterado el factor de equilibrio de algun nodo
+	}
+	
+	public void insertar(int dato) {
+		raiz = insertarNodo(raiz, dato);
 	}
 	
 	//Eliminar nodo
@@ -39,6 +43,13 @@ public class ArbolAVL {
 		nodo.altura = Math.max(alturaNodo(nodo.izquierdo), alturaNodo(nodo.derecho)) + 1;
 		return balancear(nodo);
 	}
+	public void eliminar(int dato) {
+		if (buscarNodo(this.raiz, dato)) {
+		raiz = eliminarNodo(raiz, dato);
+		}else {
+			System.out.println("Dato inexistente en el arbol....");
+		}
+	}
 	//Minimo de un arbol
 	private Nodo minimo(Nodo nodo) { //Recibe como parametro la raiz del arbol/subarbol del cual se va a determinar su nodo mas pequeño
 		while(nodo.izquierdo != null) {
@@ -46,6 +57,7 @@ public class ArbolAVL {
 		}
 		return nodo;
 	}
+	
 	//Buscar nodo
 	private boolean buscarNodo(Nodo nodo, int valor) {
 		if(nodo==null) return false;
@@ -93,11 +105,11 @@ public class ArbolAVL {
 		int fe = factorEquilibrio(nodo);
 		//Caso II/LL -> Rotar a la derecha
 		if( fe > 1 && factorEquilibrio(nodo.izquierdo) >= 0 ) { //FE desbalanceado = 2 y FE hijo izquierdo = 1 o 0
-			return rotacionSimpleDerecha(nodo);
+			return rotacionSimpleDerecha(nodo); 
 		}
 		//Caso ID/LR -> Rotar primero a la izquierda y luego a la derecha
 		if( fe > 1 && factorEquilibrio(nodo.izquierdo) < 0 ) { //FE desbalanceado = 2 y FE hijo izquierdo = -1
-			nodo.izquierdo=rotacionSimpleIzquierda(nodo.izquierdo);
+			nodo.izquierdo=rotacionSimpleIzquierda(nodo.izquierdo); 
 			return rotacionSimpleDerecha(nodo);
 		}
 		//Caso DD/RR -> Rotar a la izquierda
@@ -112,31 +124,38 @@ public class ArbolAVL {
 		return nodo;
 	}
 	
-	
-	
 	//Ordenes
-	private void PreOrder(Nodo nodo) {
-		if(nodo==null) return;
-		System.out.print(nodo.valor + "-");
-		PreOrder(nodo.izquierdo);
-		PreOrder(nodo.derecho);
-	}
 	private void InOrder(Nodo nodo) {
-		if(nodo==null) return;
-		InOrder(nodo.izquierdo);
-		System.out.print(nodo.valor + "-");
-		
-		InOrder(nodo.derecho);
+		  if (nodo != null) {
+	            InOrder(nodo.izquierdo);
+	            System.out.print(nodo.valor + " ");
+	            InOrder(nodo.derecho);
+	        }
 	}
-	private void PostOrder(Nodo nodo) {
-		if(nodo==null) return;
-		
-		PostOrder(nodo.izquierdo);
-		PostOrder(nodo.derecho);
-		System.out.print(nodo.valor + "-");
+	
+	public void ImpInOrder() {
+		InOrder(raiz);
+		System.out.println();
 	}
 	
 	
-	
+	@Override
+    public String toString() {
+        StringBuilder arbol = new StringBuilder();
+        imprimirÁrbolAux(raiz, 0, arbol);
+        return arbol.toString();
+    }
+
+    // Método auxiliar para imprimir el árbol en forma de texto
+    private void imprimirÁrbolAux(Nodo nodo, int nivel, StringBuilder arbol) {
+        if (nodo != null) {
+            imprimirÁrbolAux(nodo.derecho, nivel + 1, arbol);
+            for (int i = 0; i < nivel; i++) {
+                arbol.append("                 ");
+            }
+            arbol.append(nodo.valor).append("\n");
+            imprimirÁrbolAux(nodo.izquierdo, nivel + 1, arbol);
+        }
+    }
 	
 }
