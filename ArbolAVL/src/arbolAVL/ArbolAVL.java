@@ -45,7 +45,7 @@ private Nodo raiz; //El árbol empieza desde una raíz. Es un puntero que nunca 
 	}
 	public void eliminar(int dato) {
 		if (buscarNodo(this.raiz, dato)) {
-		raiz = eliminarNodo(raiz, dato);
+			raiz = eliminarNodo(raiz, dato);
 		}else {
 			System.out.println("Dato inexistente en el arbol....");
 		}
@@ -157,5 +157,4 @@ private Nodo raiz; //El árbol empieza desde una raíz. Es un puntero que nunca 
             imprimirÁrbolAux(nodo.izquierdo, nivel + 1, arbol);
         }
     }
-	
 }
